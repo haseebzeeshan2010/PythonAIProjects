@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e  # Exit on error
 
-echo "🔧 Updating system packages..."
+# update/upgrade
 apt-get update && apt-get upgrade -y
 
-echo "📦 Installing core build tools..."
+# install essential packages
 apt-get install -y \
     build-essential \
     git \
@@ -16,12 +16,12 @@ apt-get install -y \
     python3-pip \
     python3-venv
 
-echo "🐍 Upgrading pip and setuptools..."
+# upgrade pip and setuptools(dependency of pip)
 python3 -m pip install --upgrade pip setuptools wheel
 
-echo "🤖 Installing common AI/ML libraries..."
+# install AI/ML libraries
 python3 -m pip install --upgrade \
-    numpy \
+    "numpy>=2.0,<2.3" \
     pandas \
     scikit-learn \
     matplotlib \
@@ -33,4 +33,8 @@ python3 -m pip install --upgrade \
     accelerate \
     datasets
 
-echo "✅ Post-create setup complete! Ready for AI development 🚀"
+# install computer vision libraries
+python3 -m pip install --upgrade \
+    opencv-python \
+    opencv-contrib-python \
+    scikit-image
